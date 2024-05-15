@@ -24,10 +24,11 @@ export default function Component() {
     order?: number;
   } | null>(null);
 
-  const filteredImages = filter === "All" ? images : imagesByCategory[filter];
+  const filteredImages: any =
+    filter === "All" ? images : imagesByCategory[filter];
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: any) => {
       // Check if the clicked element is not the zoomed image
       if (
         selectedImage &&
@@ -117,7 +118,7 @@ export default function Component() {
             ))}
           </nav>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredImages.map((image) => (
+            {filteredImages.map((image: any) => (
               <div key={image.name} className="relative group">
                 <Image
                   src={image.url}
@@ -225,7 +226,7 @@ export default function Component() {
   );
 }
 
-function InstagramIcon(props) {
+function InstagramIcon(props: any) {
   return (
     <svg
       {...props}
