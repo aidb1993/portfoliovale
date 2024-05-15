@@ -49,30 +49,18 @@ export default function Component() {
   }, [selectedImage]);
   return (
     <div className="bg-stone-200">
-      <header className="bg-gray-100 py-6 dark:bg-gray-800 sticky top-0 z-30">
+      <header className="py-6 bg-gray-800 sticky top-0 z-30">
         <nav className="container px-4 md:px-6 flex items-center justify-evenly md:justify-start gap-4">
-          <Link
-            className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-            href="#"
-          >
+          <Link className="text-gray-400 hover:text-gray-50" href="#">
             Home
           </Link>
-          <Link
-            className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-            href="/#gallery"
-          >
+          <Link className="text-gray-400 hover:text-gray-50" href="/#gallery">
             Galeria
           </Link>
-          <Link
-            className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-            href="/#about"
-          >
+          <Link className="text-gray-400 hover:text-gray-50" href="/#about">
             Sobre mi
           </Link>
-          <Link
-            className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-            href="/#contact"
-          >
+          <Link className=" text-gray-400 hover:text-gray-50" href="/#contact">
             Contacto
           </Link>
         </nav>
