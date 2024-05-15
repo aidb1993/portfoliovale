@@ -1,0 +1,72 @@
+{
+  "images": [
+    {
+      "name": "Plenilunio",
+      "url": "/Plenilunio (40x50cm, acrílico sobre tela).png",
+      "order": 1,
+      "category": "Pintura",
+      "home": true,
+      "description": "40x50cm Acrilico sobre tela"
+    },
+    {
+      "name": "Pelvis ósea",
+      "url": "/Pélvis ósea (40x50cm, acrílico sobre tela).png",
+      "order": 2,
+      "category": "Pintura",
+      "home": true,
+      "description": "40x50cm Acrilico sobre tela"
+    },
+    {
+      "name": "Radiografía sutil",
+      "url": "/Radiografía sutil (70x50, acrílico sobre tela).png",
+      "order": 1,
+      "category": "Pintura",
+      "home": true,
+      "description": "70x50cm, acrílico sobre tela"
+    },
+    {
+      "name": "Corazón",
+      "url": "/Corazón (30x40, acrílico sobre tela).png",
+      "order": 1,
+      "category": "Pintura",
+      "home": true,
+      "description": "30x40cm Acrilico sobre tela"
+    },
+    {
+      "name": "Laberinto",
+      "url": "/Laberinto (35x45 cm, acrílico sobre tela).png",
+      "order": 3,
+      "category": "Pintura",
+      "home": true,
+      "description": "35x45cm Acrilico sobre tela"
+    },
+    {
+      "name": "Ilustracion 1",
+      "url": "/Ilustración 1.png",
+      "category": "Ilustraciones",
+      "home": false,
+      "description": "De Poemas Exhalados por Andrea V. Orduna"
+    },
+    {
+      "name": "Ilustracion 2",
+      "url": "/Ilustración 2.png",
+      "category": "Ilustraciones",
+      "home": false,
+      "description": "De Poemas Exhalados por Andrea V. Orduna"
+    },
+    {
+      "name": "Ilustracion 3",
+      "url": "/Ilustración 3.png",
+      "category": "Ilustraciones",
+      "home": false,
+      "description": "De Poemas Exhalados por Andrea V. Orduna"
+    },
+    {
+      "name": "Espíritu en la materia",
+      "url": "/Espíritu en la materia (Técnica mixta).png",
+      "category": "Ilustraciones",
+      "home": false,
+      "description": "Técnica mixta"
+    }
+  ]
+}

@@ -1,113 +1,247 @@
+"use client";
 import Image from "next/image";
+import data from "./data.json";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default function Home() {
+export default function Component() {
+  const images = data.images;
+  const categories: string[] = Array.from(
+    new Set(images.map((img) => img.category))
+  );
+  const imagesByCategory: any = [];
+  categories.forEach((category) => {
+    imagesByCategory[category] = images.filter(
+      (img) => img.category === category
+    );
+  });
+  const [filter, setFilter] = useState("All");
+  const [selectedImage, setSelectedImage] = useState<{
+    name: string;
+    url: string;
+    category: string;
+    home: boolean;
+    order?: number;
+  } | null>(null);
+
+  const filteredImages = filter === "All" ? images : imagesByCategory[filter];
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if the clicked element is not the zoomed image
+      if (
+        selectedImage &&
+        !event.target.closest(".fixed > div") &&
+        !event.target.closest(".relative")
+      ) {
+        setSelectedImage(null);
+      }
+    };
+
+    // Add event listener to the entire document
+    document.addEventListener("click", handleClickOutside);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [selectedImage]);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="bg-stone-200">
+      <header className="bg-gray-100 py-6 dark:bg-gray-800 sticky top-0 z-30">
+        <nav className="container px-4 md:px-6 flex items-center justify-evenly md:justify-start gap-4">
+          <Link
+            className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+            href="#"
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            Home
+          </Link>
+          <Link
+            className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+            href="/#gallery"
+          >
+            Galeria
+          </Link>
+          <Link
+            className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+            href="/#about"
+          >
+            Sobre mi
+          </Link>
+          <Link
+            className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+            href="/#contact"
+          >
+            Contacto
+          </Link>
+        </nav>
+      </header>
+      <div className="p-6 bg-gray-800">
+        <div className="grid gap-6 md:grid-cols-2 items-center">
+          <div className="space-y-4 md:mt-[-60px]">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-[#B8DBD9]">
+              Valentina Ferreira Orduna
+            </h1>
+          </div>
+          <Image
+            alt="Jenna Doe"
+            className="mx-auto rounded-lg object-cover aspect-square"
+            height={500}
+            src="/Plenilunio (40x50cm, acrílico sobre tela).png"
+            width={500}
+          />
         </div>
       </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="container px-4 md:px-6 py-12 md:py-24" id="gallery">
+        <div className="grid md:grid-cols-[240px_1fr] gap-10">
+          <nav className="flex flex-col gap-2 items-start">
+            <h3 className="font-semibold">Filtrar por:</h3>
+            <button
+              onClick={() => setFilter("All")}
+              className={`text-gray-500 hover:text-gray-900 hover:font-bold ${
+                filter === "All" ? "font-bold" : ""
+              }`}
+            >
+              Todos
+            </button>
+            {categories.map((category) => (
+              <button
+                onClick={() => setFilter(category)}
+                key={category}
+                className={`text-gray-500 hover:text-gray-900 hover:font-bold  ${
+                  filter === category ? "font-bold" : ""
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </nav>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredImages.map((image) => (
+              <div key={image.name} className="relative group">
+                <Image
+                  src={image.url}
+                  alt={image.name}
+                  width="700"
+                  height="300"
+                  sizes="(max-width: 640px) 100vw, (min-width: 640px) 50vw"
+                  quality={100}
+                  style={{ objectFit: "fill" }}
+                  className="rounded-lg shadow-lg aspect-square mx-auto cursor-pointer"
+                  onClick={() => setSelectedImage(image)}
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-90 p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col gap-2">
+                  <p className="text-sm">{image.name}</p>
+                  <p className="text-xs">{image.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          {selectedImage && (
+            <div className="fixed top-0 left-0 z-50 w-full h-full bg-black bg-opacity-90 flex items-center justify-center">
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-4 right-4 text-white text-3xl"
+              >
+                X
+              </button>
+              <Image
+                src={selectedImage.url}
+                alt={selectedImage.name}
+                width="700"
+                height="300"
+                sizes="(max-width: 640px) 100vw, (min-width: 640px) 50vw"
+                quality={100}
+                style={{ objectFit: "fill" }}
+                className="rounded-lg shadow-lg aspect-square mx-auto"
+              />
+            </div>
+          )}
+        </div>
+        <div className="mt-12 md:mt-24 space-y-4" id="about">
+          <div className="md:flex gap-4">
+            <div className="md:w-[70%] space-y-2 mb-8 md:mb-0">
+              <h3 className="font-semibold">Biografia</h3>
+              <p className="text-gray-700">
+                Valentina Ferreira Orduna es una novel artista paranaense que
+                explora actualmente la técnica del acrílico sobre tela. Crea
+                paisajes o personajes donde se superponen los mundos oníricos y
+                perceptivos, logrando imágenes fuertemente cargadas de
+                espiritualidad y significado. Se caracteriza desde sus comienzos
+                por una marcada curiosidad que la llevó desde la literatura y la
+                traducción a la astrología y el yoga, buscando formas de
+                comprender y expresar la esencia que está más allá de lo
+                aparente. Su recorrido comenzó como autodidacta para formarse
+                luego en talleres de distintas técnicas, profundizando en el
+                estudio de la figura humana.
+              </p>
+            </div>
+            <Image
+              alt="Valentina Ferreira Orduna"
+              className="mx-auto rounded-lg object-cover aspect-square"
+              height={500}
+              src="/perfilvale.jpg"
+              width={300}
+            />
+          </div>
+          <div className="space-y-2">
+            <h3 className="font-semibold">Statement</h3>
+            <p className="text-gray-700">
+              La elección del color, la composición y la disposición de los
+              objetos y las formas en el espacio del bastidor funcionan
+              meramente como disparadores que me permiten materializar un estado
+              meditativo interior. La fascinación por el mundo de lo simbólico
+              carga mis imágenes de arquetipos que intentan despertar en el
+              espectador cierta verdad (personal pero a la vez colectiva) que no
+              puede ser transmitida con palabras. Mi proceso creativo, como los
+              ciclos de la naturaleza, incluye pasar por distintas fases de luz
+              y oscuridad: cada obra me atraviesa profundamente y es sostenida
+              por mi cuerpo. Mi intento es la expresión de lo único en mí como
+              forma de inspirar lo único en cada uno, son olvidar lo universal
+              que nos une.
+            </p>
+          </div>
+        </div>
       </div>
+      <footer id="contact" className="bg-gray-100 py-12 dark:bg-gray-800">
+        <div className="container px-4 md:px-6 flex flex-col">
+          <div className="space-y-2 flex flex-col">
+            <h3 className="font-semibold text-white">Contacto</h3>
+            <p className="text-gray-500 dark:text-gray-400">
+              valentinaferreira1995@gmail.com
+            </p>
+            <Link
+              className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+              href="https://www.instagram.com/vale.ferreiraorduna?igsh=MXAxODB5ajlhMXBubQ=="
+              target="_blank"
+            >
+              <InstagramIcon className="w-5 h-5" />
+              <span className="sr-only">Instagram</span>
+            </Link>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+function InstagramIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
   );
 }
