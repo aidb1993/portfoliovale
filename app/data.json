@@ -1,7 +1,23 @@
 {
   "images": [
     {
-      "name": "Plenilunio",
+      "name": "Tercer ojo(2024)",
+      "url": "Tercer ojo.png",
+      "order": 1,
+      "category": "Pintura",
+      "home": true,
+      "description": "40x50cm Acrilico sobre tela"
+    },
+    {
+      "name": "Apertura(2024)",
+      "url": "/contemplacion.png",
+      "order": 1,
+      "category": "Pintura",
+      "home": true,
+      "description": "40x50cm Acrilico sobre tela"
+    },
+    {
+      "name": "Plenilunio(2024)",
       "url": "/Plenilunio (40x50cm, acrílico sobre tela).png",
       "order": 1,
       "category": "Pintura",
@@ -9,7 +25,7 @@
       "description": "40x50cm Acrilico sobre tela"
     },
     {
-      "name": "Pelvis ósea",
+      "name": "Pelvis ósea(2024)",
       "url": "/Pélvis ósea (40x50cm, acrílico sobre tela).png",
       "order": 2,
       "category": "Pintura",
@@ -17,7 +33,7 @@
       "description": "40x50cm Acrilico sobre tela"
     },
     {
-      "name": "Radiografía sutil",
+      "name": "Radiografía sutil(2024)",
       "url": "/Radiografía sutil (70x50, acrílico sobre tela).png",
       "order": 1,
       "category": "Pintura",
@@ -25,7 +41,7 @@
       "description": "70x50cm, acrílico sobre tela"
     },
     {
-      "name": "Corazón",
+      "name": "Corazón(2023)",
       "url": "/Corazón (30x40, acrílico sobre tela).png",
       "order": 1,
       "category": "Pintura",
@@ -33,7 +49,7 @@
       "description": "30x40cm Acrilico sobre tela"
     },
     {
-      "name": "Laberinto",
+      "name": "Laberinto(2023)",
       "url": "/Laberinto (35x45 cm, acrílico sobre tela).png",
       "order": 3,
       "category": "Pintura",
@@ -41,39 +57,32 @@
       "description": "35x45cm Acrilico sobre tela"
     },
     {
-      "name": "Ilustracion 1",
+      "name": "Ilustracion 1(2020)",
       "url": "/Ilustración 1.png",
       "category": "Ilustraciones",
       "home": false,
       "description": "De Poemas Exhalados por Andrea V. Orduna"
     },
     {
-      "name": "Ilustracion 2",
+      "name": "Ilustracion 2(2020)",
       "url": "/Ilustración 2.png",
       "category": "Ilustraciones",
       "home": false,
       "description": "De Poemas Exhalados por Andrea V. Orduna"
     },
     {
-      "name": "Ilustracion 3",
+      "name": "Ilustracion 3(2020)",
       "url": "/Ilustración 3.png",
       "category": "Ilustraciones",
       "home": false,
       "description": "De Poemas Exhalados por Andrea V. Orduna"
     },
     {
-      "name": "Espíritu en la materia",
+      "name": "Espíritu en la materia(2020)",
       "url": "/Espíritu en la materia (Técnica mixta).png",
       "category": "Ilustraciones",
       "home": false,
       "description": "Técnica mixta"
-    },
-    {
-      "name": "Mujer calavera",
-      "url": "/Mujer-calavera (Pastel al óleo, enduido y grafito).png",
-      "category": "Ilustraciones",
-      "home": false,
-      "description": "Pastel al óleo, enduido y grafito"
     }
   ]
 }
